@@ -28,8 +28,8 @@ export class StudentService {
   deleteStudent(
     id: string
   ): Observable<any> {
-    const options = {id};
-    return this.http.post(`${this.studentUrl}deleteStudent`, qs.stringify(options), httpOptions);
+    const params = new HttpParams().append('id', `${id}`);
+    return this.http.get(`${this.studentUrl}deleteStudent`, {params});
   }
 
   editStudent(
@@ -40,8 +40,14 @@ export class StudentService {
     age: number,
     classId: string
   ): Observable<any> {
-    const options = {id, sno, name, gender, age, classId};
-    return this.http.post(`${this.studentUrl}editStudent`, qs.stringify(options), httpOptions);
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('sno', sno);
+    formData.append('name', name);
+    formData.append('gender', gender.toString());
+    formData.append('age', age.toString());
+    formData.append('classId', classId.toString());
+    return this.http.post(`${this.studentUrl}editStudent`, formData, {});
   }
 
   addStudent(
@@ -51,9 +57,13 @@ export class StudentService {
     age: number,
     classId: string
   ): Observable<any> {
-    const options = {sno, name, gender, age, classId};
-    console.log('addTeacher: ' + qs.stringify(options, {indices: false}));
-    return this.http.post(`${this.studentUrl}addStudent`, qs.stringify(options), httpOptions);
+    const formData = new FormData();
+    formData.append('sno', sno);
+    formData.append('name', name);
+    formData.append('gender', gender.toString());
+    formData.append('age', age.toString());
+    formData.append('classId', classId.toString());
+    return this.http.post(`${this.studentUrl}addStudent`, formData ,{});
   }
 
   constructor(private http: HttpClient) {

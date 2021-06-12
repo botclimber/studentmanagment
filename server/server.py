@@ -7,10 +7,23 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '21savage'
 
 teachers = [{'id':1, 'subjectIds':'1,2', 'subjectNames': 'ISI, ES','name':'bairro 13', 'age':'19', 'gender': 1,'file':''}] # id, name, age, genre, subjectIds, subjectNames (server arrangment), img
-students = []
-classes = [{'id': 1, 'className': 'turma A', 'grade': 1, 'mainTeacher': {'id': 1, 'name':'bairro 13'}}]
+students = [{'id': 1,'sno':1, 'name':'xpto','gender':1,'age':25,'classes':{'grade':1, 'className':'turma A'}}]
+classes = [{'id': 1, 'className': 'turma A', 'grade': 1, 'mainTeacher': {'id': 1, 'name':'bairro 13'}}, {'id': 2, 'className': 'turma B', 'grade': 2, 'mainTeacher': {'id': 1, 'name':'bairro 13'}}]
 courses = [{'id':1, 'grade': 2, 'subjectIds': '1,2','subjectNames':'ISI,ES'}]
 subjects = [{'id': 1, 'name':'ISI'}, {'id': 2, 'name':'ES'}] # id, name
+
+
+def classThreat(classId):
+
+
+	classe = None
+	grade = None
+	for x in classes:
+		if x['id'] == int(classId): 
+			classe = x['className']		
+			grade = x['grade']
+
+	return classe, grade
 
 
 def subThreat(subjectIds ):
@@ -190,6 +203,61 @@ def edit_classes():
 	return jsonify({}), 200	
 # *************** ******** ******************
 
+
+# STUDENTS 
+# *************** STUDENTS ******************
+
+@app.route('/studentmanage/student/students', methods=['GET'])
+def all_students():
+
+
+	return jsonify({'data':{'students': students, 'total': len(students)}}), 200	
+
+
+@app.route('/studentmanage/student/addStudent', methods=['POST'])
+def add_student():
+	data = request.form
+	print(data)
+	
+	classe, grade = classThreat(data['classId'])
+	
+	students.append({'sno': data['sno'], 'name': data['name'], 'age': data['age'], 'gender': int(data['gender']), 'classes':{'grade': grade, 'className': classe}})
+
+	return jsonify({}), 200	
+
+
+@app.route('/studentmanage/student/editStudent', methods=['POST'])
+def edit_student():
+	data = request.form
+	print(data)
+
+	classe, grade = classThreat(data['classId'])
+	
+	for x in range(len(students)):
+		if students[x]['id'] == int(data['id']):
+
+			students[x]['sno'] = data['sno']
+			students[x]['name'] = data['name']
+			students[x]['gender'] = int(data['gender'])
+			students[x]['age'] = data['age']
+			students[x]['classes']['grade'] = grade 
+			students[x]['classes']['className'] = classe 
+			
+
+	return jsonify({}), 200	
+
+
+@app.route('/studentmanage/student/deleteStudent', methods=['GET'])
+def delete_student():
+	data = request.args
+	print(data)
+
+	for x in range(len(students)):
+		if students[x]['id'] == int(data.get('id')):
+			students.pop(x)
+
+	return jsonify({}), 200	
+# *************** ******** ******************
 
 if __name__ == '__main__':
 	app.run(debug = True, port=8080)

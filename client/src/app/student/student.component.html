@@ -95,6 +95,7 @@
           (nzScrollToBottom)="loadMore()"
           [(ngModel)]="editCache[data.id].data.classes"
         >
+          <nz-option [nzLabel]="formatClass(data.classes)"  [nzValue]="data.classes"></nz-option>
           <nz-option *ngFor="let class of classes" [nzLabel]="formatClass(class)" [nzValue]="class"></nz-option>
           <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
             <i nz-icon nzType="loading" class="loading-icon"></i> 加载中...

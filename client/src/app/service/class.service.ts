@@ -67,8 +67,11 @@ export class ClassService {
     subjectId: string,
     teacherId: string
   ): Observable<any> {
-    const options = { id, subjectId, teacherId };
-    return this.http.post(`${this.classUrl}editCourseTeacher`, qs.stringify(options), httpOptions);
+    const params = new HttpParams()
+      .append('id', `${id}`)
+      .append('subjectId', `${subjectId}`)
+      .append('teacherId', `${teacherId}`);
+    return this.http.get(`${this.classUrl}editCourseTeacher`, {params});
   }
   constructor(private http: HttpClient) {}
 }
