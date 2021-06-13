@@ -2,7 +2,7 @@
   <nz-breadcrumb nz-page-header-breadcrumb [nzAutoGenerate]="true">
   </nz-breadcrumb>
 </nz-page-header>
-<button nz-button nzType="primary" class="add-button" routerLink="addClass">新增</button>
+<button nz-button nzType="primary" class="add-button" routerLink="addClass">Adicionar Turma</button>
 <nz-table #ajaxTable
           nzShowSizeChanger
           [nzFrontPagination]="false"
@@ -16,9 +16,9 @@
   <thead>
   <tr>
     <th nzWidth="5%">#</th>
-    <th nzWidth="12%">班级</th>
-    <th nzWidth="10%">年级</th>
-    <th nzCustomFilter nzWidth="30%">班主任<i
+    <th nzWidth="12%">Turma</th>
+    <th nzWidth="10%">Semestre</th>
+    <th nzCustomFilter nzWidth="30%">Professor<i
       class="ant-table-filter-icon"
       nz-icon
       nz-dropdown
@@ -31,7 +31,7 @@
       [nzClickHide]="false"
       nzTableFilter
     ></i></th>
-    <th nzWidth="20%">操作</th>
+    <th nzWidth="20%">Opções</th>
   </tr>
   </thead>
   <tbody>
@@ -48,14 +48,14 @@
     <td>
       <ng-container *ngIf="!editCache[data.id].edit; else gradeRadioTpl">
         <div [ngSwitch]="data.grade">
-          <div    *ngSwitchCase="1">一年级</div>
-          <div    *ngSwitchCase="2">二年级</div>
+          <div    *ngSwitchCase="1">Priemiro Semestre</div>
+          <div    *ngSwitchCase="2">Segundo Semestre</div>
         </div>
       </ng-container>
       <ng-template #gradeRadioTpl>
         <nz-radio-group [(ngModel)]="editCache[data.id].data.grade">
-          <label nz-radio [nzValue]="1">一年级</label>
-          <label nz-radio [nzValue]="2">二年级</label>
+          <label nz-radio [nzValue]="1">Priemiro Semestre</label>
+          <label nz-radio [nzValue]="2">Segundo Semestre</label>
         </nz-radio-group>
       </ng-template>
     </td>
@@ -66,7 +66,7 @@
       <ng-template #teacherSelectTpl>
         <nz-select
           style="width: 100%"
-          nzPlaceHolder="请选择"
+          nzPlaceHolder="Por Favor Escolha"
           [compareWith]="compareFn"
           [nzDropdownStyle]="{height: 50}"
           (nzScrollToBottom)="loadMore()"
@@ -74,7 +74,7 @@
         >
           <nz-option *ngFor="let teacher of teachers" [nzLabel]="teacher.name" [nzValue]="teacher"></nz-option>
           <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
-            <i nz-icon nzType="loading" class="loading-icon"></i> 加载中...
+            <i nz-icon nzType="loading" class="loading-icon"></i> Carregando...
           </nz-option>
         </nz-select>
       </ng-template>
@@ -82,16 +82,16 @@
     <td>
       <div class="editable-row-operations">
         <ng-container *ngIf="!editCache[data.id].edit; else saveTpl">
-          <a routerLink="courseTeacher/{{data.id}}/{{data.grade}}">查看课程</a>
+          <a routerLink="courseTeacher/{{data.id}}/{{data.grade}}">Ver Curso</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="startEdit(data.id)">编辑</a>
+          <a (click)="startEdit(data.id)">Editar</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a nz-popconfirm nzTitle="确定要删除吗?" (nzOnConfirm)="delete(data.id)">删除</a>
+          <a nz-popconfirm nzTitle="Tem certeza que deseja eliminar?" (nzOnConfirm)="delete(data.id)">Eliminar</a>
         </ng-container>
         <ng-template #saveTpl>
-          <a nz-popconfirm nzTitle="确定要保存吗?" (nzOnConfirm)="saveEdit(data.id)">保存</a>
+          <a nz-popconfirm nzTitle="Tem certeza que deseja guardar?" (nzOnConfirm)="saveEdit(data.id)">Guardar</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="cancelEdit(data.id)">取消</a>
+          <a (click)="cancelEdit(data.id)">Cancelar</a>
         </ng-template>
       </div>
     </td>
@@ -100,11 +100,11 @@
 </nz-table>
 <nz-dropdown-menu #menu="nzDropdownMenu">
   <div class="search-box">
-    <input type="text" nz-input placeholder="搜索名称" [(ngModel)]="searchValue" />
+    <input type="text" nz-input placeholder="Nome da pesquisa" [(ngModel)]="searchValue" />
     <button nz-button nzSize="small" nzType="primary" (click)="searchData()" class="search-button">
-      搜索
+      Procurar
     </button>
-    <button nz-button nzSize="small" (click)="reset()">重置</button>
+    <button nz-button nzSize="small" (click)="reset()">Redefinir</button>
   </div>
 </nz-dropdown-menu>
 

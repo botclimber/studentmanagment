@@ -8,7 +8,7 @@ import {ClassService} from '../service/class.service';
   styleUrls: ['./student.component.css']
 })
 export class StudentComponent implements OnInit {
-  title = '学生';
+  title = 'Estudantes';
   students = [];
   pageIndex = 1;
   pageSize = 5;
@@ -97,10 +97,10 @@ export class StudentComponent implements OnInit {
     let str = '';
     switch (classes.grade) {
       case 1:
-        str = '一年级';
+        str = 'Primeiro Semestre - ';
         break;
       case 2:
-        str = '二年级';
+        str = 'Segundo Semestre - ';
         break;
     }
     str = str + classes.className;

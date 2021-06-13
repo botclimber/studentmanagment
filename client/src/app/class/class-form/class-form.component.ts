@@ -11,7 +11,7 @@ import {ClassService} from '../../service/class.service';
   styleUrls: ['./class-form.component.css']
 })
 export class ClassFormComponent implements OnInit {
-  title = '新增班级';
+  title = 'Nova Turma';
   classForm: FormGroup;
   teachers: any[] = [];
   isLoading = false;

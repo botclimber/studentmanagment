@@ -4,40 +4,40 @@
 </nz-page-header>
 <form nz-form [formGroup]="classForm" (ngSubmit)="submitForm()">
   <nz-form-item>
-    <nz-form-label [nzSpan]="3" nzRequired nzFor="className">班级名称</nz-form-label>
-    <nz-form-control [nzSpan]="8" nzErrorTip="请输入班级名称">
+    <nz-form-label [nzSpan]="3" nzRequired nzFor="className">Nome da Turma </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Por favor, insira o nome da turma">
       <input type="text" nz-input formControlName="className" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="3" nzRequired nzFor="grade">年级</nz-form-label>
-    <nz-form-control [nzSpan]="8" nzErrorTip="请选择年级">
+    <nz-form-label [nzSpan]="3" nzRequired nzFor="grade">Semestre</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Selecione a Nota">
       <nz-radio-group formControlName="grade">
-        <label nz-radio [nzValue]="1">一年级</label>
-        <label nz-radio [nzValue]="2">二年级</label>
+        <label nz-radio [nzValue]="1">Primeiro Semestre</label>
+        <label nz-radio [nzValue]="2">Segundo Semestre</label>
       </nz-radio-group>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="3" nzRequired nzFor="mainTeacherId">班主任</nz-form-label>
-    <nz-form-control [nzSpan]="8" nzErrorTip="请选择班主任">
+    <nz-form-label [nzSpan]="3" nzRequired nzFor="mainTeacherId">Professor</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Por favor, escolha o professor da turma">
       <nz-select
         style="width: 100%"
-        nzPlaceHolder="请选择"
+        nzPlaceHolder="Por Favor Escolha"
         [nzDropdownStyle]="{height: 50}"
         (nzScrollToBottom)="loadMore()"
         formControlName="mainTeacherId"
       >
         <nz-option *ngFor="let teacher of teachers" [nzLabel]="teacher.name" [nzValue]="teacher.id"></nz-option>
         <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
-          <i nz-icon nzType="loading" class="loading-icon"></i> 加载中...
+          <i nz-icon nzType="loading" class="loading-icon"></i> Carregando...
         </nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-control [nzSpan]="8" [nzOffset]="4">
-      <button nz-button nzType="primary">提交</button>
+      <button nz-button nzType="primary">Gravar</button>
     </nz-form-control>
   </nz-form-item>
 </form>

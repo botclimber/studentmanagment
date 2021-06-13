@@ -9,7 +9,7 @@ import {ClassService} from '../service/class.service';
   styleUrls: ['./class.component.css']
 })
 export class ClassComponent implements OnInit {
-  title = '班级';
+  title = 'Turmas';
   classes = [];
   pageIndex = 1;
   pageSize = 5;

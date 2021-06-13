@@ -13,7 +13,7 @@ import {DomSanitizer} from '@angular/platform-browser';
   styleUrls: ['./teacher.component.css']
 })
 export class TeacherComponent implements OnInit {
-  title = '教师';
+  title = 'Professores';
   teachers = [];
   pageIndex = 1;
   pageSize = 5;

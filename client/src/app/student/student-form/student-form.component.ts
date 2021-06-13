@@ -11,7 +11,7 @@ import {ClassService} from '../../service/class.service';
   styleUrls: ['./student-form.component.css']
 })
 export class StudentFormComponent implements OnInit {
-  title = '新增学生';
+  title = 'Inserir Novo Estudante';
   studentForm: FormGroup;
   classes: any[] = [];
   isLoading = false;
@@ -62,10 +62,10 @@ export class StudentFormComponent implements OnInit {
     let str = '';
     switch (classes.grade) {
       case 1:
-        str = '一年级';
+        str = 'Primeiro Semestre - ';
         break;
       case 2:
-        str = '二年级';
+        str = 'Segundo Semestre - ';
         break;
     }
     str = str + classes.className;

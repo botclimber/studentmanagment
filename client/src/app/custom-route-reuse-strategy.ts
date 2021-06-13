@@ -7,7 +7,7 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
   to = '';
 
   shouldReuseRoute(from: ActivatedRouteSnapshot, to: ActivatedRouteSnapshot): boolean {
-    // return true; // 如果这样，url会变，但是不会跳转
+    // return true; // Nesse caso, o url mudará, mas não redirecionará
     console.log(from.routeConfig, to.routeConfig);
     console.log('shouldReuseRoute', from.routeConfig === to.routeConfig);
     if (from.routeConfig) {
@@ -39,7 +39,7 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
     const path = this.getPath(route);
     console.log('shouldAttach', this.storedRouteHandles.has(path), route);
-    // return this.from === 'abc' && this.to === 'index';  下面这个也行
+    // return this.from === 'abc' && this.to === 'index';  O seguinte também funcionará
     return !!this.storedRouteHandles.get(path);
   }
 

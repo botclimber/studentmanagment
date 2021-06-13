@@ -13,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './teacherForm.component.html'
 })
 export class TeacherFormComponent implements OnInit {
-  title = '新增教师';
+  title = 'Registar Novo Professor';
   teacherForm: FormGroup;
   subjects: any[] = [];
   isLoading = false;
@@ -58,7 +58,7 @@ export class TeacherFormComponent implements OnInit {
       subjectIds: [[], [Validators.required]]
     });
     if (this.teacherId != null) {
-      this.title = '编辑教师';
+      this.title = 'Sem Dados';
     }
     this.loadMore();
   }

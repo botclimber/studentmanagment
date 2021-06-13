@@ -17,7 +17,9 @@ export class MyInterceptor implements HttpInterceptor {
   constructor(private router: Router) {}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let authReq: any;
-    // 实现第一次不拦截的方式：1. 指定接口不拦截  2. 判断本地localStorage
+    // Maneiras de conseguir a primeira não interceptação: 
+    //1.Especifique a interface para não interceptar
+    //2.Determine o localStorage local
     if (!req.url.includes('login')) {
       const token = sessionStorage.getItem('token');
       const username = sessionStorage.getItem('username');
@@ -25,13 +27,13 @@ export class MyInterceptor implements HttpInterceptor {
       authReq = req.clone({ setHeaders: {  token, username } });
       return next.handle(authReq).pipe(
         mergeMap((event: any) => {
-          // 允许统一对请求错误处理
+          // Permitir tratamento unificado de erros de solicitação
             /*if ((event instanceof HttpResponse) === false) {
                   const body: any = event.body;
                   console.dir('bro: '+body.code);
                   if (body.code !== 200) {
-                      // 继续抛出错误中断后续所有 Pipe、subscribe 操作，因此：
-                      // this.http.get('/').subscribe() 并不会触发
+                      // Continue a lançar um erro para interromper todas as subseqüentes Pipe、subscribe Operação, portanto:
+                      // this.http.get('/').subscribe() não dispara
                     if (body.code === 401) {
                       this.router.navigate(['/login']);
                     } else if (body.code === 100) {
@@ -43,9 +45,9 @@ export class MyInterceptor implements HttpInterceptor {
                     }
                     return throwError({});
                   } else {
-                      // 重新修改 `body` 内容为 `response` 内容，对于绝大多数场景已经无须再关心业务状态码
+                      // Rever `body` O conteúdo é `response` Conteúdo, para a maioria dos cenários, não há mais necessidade de se preocupar com os códigos de status de negócios
                       // return of(new HttpResponse(Object.assign(event, { body: body.response })));
-                      // 或者依然保持完整的格式
+                      // Ou ainda manter o formato completo
                       return of(event);
                   }
               } else {*/
@@ -60,7 +62,7 @@ export class MyInterceptor implements HttpInterceptor {
   }
 
   private handleData(ev: HttpResponseBase): Observable<any> {
-    // 可能会因为 `throw` 导出无法执行 `_HttpClient` 的 `end()` 操作
+    // Talvez porque `throw` A exportação não pode ser realizada `_HttpClient` de `end()` operativo
     console.log(ev.status);
     return of(ev);
   }

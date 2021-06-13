@@ -10,11 +10,11 @@ export class LoginGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     let isLogin: boolean;
-    // 判断用户是否登入
+    // Determine se o usuário está logado
     const token = sessionStorage.getItem('token');
     if (!token) {
       isLogin = false;
-      // 未登入跳转到登入界面
+      // Não conectado, vá para a interface de login
       this.router.navigateByUrl('/login');
     } else {
       isLogin = true;

@@ -9,7 +9,7 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./course-teacher.component.css']
 })
 export class CourseTeacherComponent implements OnInit {
-  title = '课程及任课老师';
+  title = 'Turmas e Professores';
   courseTeachers = [];
   loading = true;
   editCache: { [key: string]: any } = {};

@@ -4,14 +4,14 @@
 </nz-page-header>
 <form nz-form [formGroup]="subjectForm" (ngSubmit)="submitForm()">
   <nz-form-item>
-    <nz-form-label [nzSpan]="3" nzRequired nzFor="name">科目名称</nz-form-label>
-    <nz-form-control [nzSpan]="8" nzErrorTip="请输入科目名称">
+    <nz-form-label [nzSpan]="3" nzRequired nzFor="name">Nome da Cadeira</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Por favor, insira o nome da cadeira antes de gravar">
       <input type="text" nz-input formControlName="name" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-control [nzSpan]="8" [nzOffset]="4">
-      <button nz-button nzType="primary">提交</button>
+      <button nz-button nzType="primary">Gravar</button>
     </nz-form-control>
   </nz-form-item>
 </form>

@@ -11,9 +11,9 @@
   <thead>
   <tr>
     <th nzWidth="5%">#</th>
-    <th>科目</th>
-    <th nzWidth="40%">老师</th>
-    <th nzWidth="20%">操作</th>
+    <th>Sujeito</th>
+    <th nzWidth="40%">Professor</th>
+    <th nzWidth="20%">Operativo</th>
   </tr>
   </thead>
   <tbody>
@@ -27,7 +27,7 @@
       <ng-template #teacherSelectTpl>
         <nz-select
           style="width: 100%"
-          nzPlaceHolder="请选择"
+          nzPlaceHolder="Por Favor Escolha"
           [compareWith]="compareFn"
           [nzDropdownStyle]="{height: 50}"
           (nzScrollToBottom)="loadMore()"
@@ -35,7 +35,7 @@
         >
           <nz-option *ngFor="let teacher of teachers" [nzLabel]="teacher.name" [nzValue]="teacher"></nz-option>
           <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
-            <i nz-icon nzType="loading" class="loading-icon"></i> 加载中...
+            <i nz-icon nzType="loading" class="loading-icon"></i> Carregando...
           </nz-option>
         </nz-select>
       </ng-template>
@@ -43,12 +43,12 @@
     <td>
       <div class="editable-row-operations">
         <ng-container *ngIf="!editCache[data.course.subject.id].edit; else saveTpl">
-          <a (click)="startEdit(data.course.subject.id)">编辑</a>
+          <a (click)="startEdit(data.course.subject.id)">Editar</a>
         </ng-container>
         <ng-template #saveTpl>
-          <a nz-popconfirm nzTitle="确定要保存吗?" (nzOnConfirm)="saveEdit(data.course.subject.id)">保存</a>
+          <a nz-popconfirm nzTitle="确定要保存吗?" (nzOnConfirm)="saveEdit(data.course.subject.id)">Guardar</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="cancelEdit(data.course.subject.id)">取消</a>
+          <a (click)="cancelEdit(data.course.subject.id)">Cancelar</a>
         </ng-template>
       </div>
     </td>

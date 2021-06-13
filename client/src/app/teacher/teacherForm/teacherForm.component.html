@@ -4,46 +4,46 @@
 </nz-page-header>
 <form nz-form [formGroup]="teacherForm" (ngSubmit)="submitForm()">
   <nz-form-item>
-    <nz-form-label [nzSpan]="3" nzRequired nzFor="name">姓名</nz-form-label>
-    <nz-form-control [nzSpan]="8" nzErrorTip="请输入教师姓名">
+    <nz-form-label [nzSpan]="3" nzRequired nzFor="name">Nome</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Por favor, insira  o nome do professor">
       <input type="text" nz-input formControlName="name" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="3" nzRequired nzFor="gender">性别</nz-form-label>
-    <nz-form-control [nzSpan]="8" nzErrorTip="请选择性别">
+    <nz-form-label [nzSpan]="3" nzRequired nzFor="gender">Gênero</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Por favor selecione um gênero">
       <nz-radio-group formControlName="gender">
-        <label nz-radio [nzValue]="1">男</label>
-        <label nz-radio [nzValue]="0">女</label>
+        <label nz-radio [nzValue]="1">Masculino</label>
+        <label nz-radio [nzValue]="0">Feminino</label>
       </nz-radio-group>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="3" nzRequired nzFor="age">年龄</nz-form-label>
-    <nz-form-control [nzSpan]="8" nzErrorTip="请输入年龄">
+    <nz-form-label [nzSpan]="3" nzRequired nzFor="age">Idade</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Por favor, insira uma idade">
       <nz-input-number formControlName="age" [nzMin]="20" [nzMax]="70" [nzStep]="1"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="3" nzRequired nzFor="subjectIds">科目</nz-form-label>
-    <nz-form-control [nzSpan]="8" nzErrorTip="请选择科目">
+    <nz-form-label [nzSpan]="3" nzRequired nzFor="subjectIds">Turma</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Por favor, selecione uma turma">
       <nz-select
         style="width: 100%"
         nzMode="multiple"
-        nzPlaceHolder="请选择"
+        nzPlaceHolder="Por Favor Escolha"
         [nzDropdownStyle]="{height: 50}"
         (nzScrollToBottom)="loadMore()"
         formControlName="subjectIds"
       >
         <nz-option *ngFor="let subject of subjects" [nzLabel]="subject.name" [nzValue]="subject.id"></nz-option>
         <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
-          <i nz-icon nzType="loading" class="loading-icon"></i> 加载中...
+          <i nz-icon nzType="loading" class="loading-icon"></i> Carregando...
         </nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="3" nzFor="file">头像</nz-form-label>
+    <nz-form-label [nzSpan]="3" nzFor="file">Imagem</nz-form-label>
     <nz-form-control [nzSpan]="8">
       <nz-upload
         nzListType="picture-card"
@@ -60,7 +60,7 @@
   </nz-form-item>
   <nz-form-item>
     <nz-form-control [nzSpan]="8" [nzOffset]="4">
-      <button nz-button nzType="primary">提交</button>
+      <button nz-button nzType="primary">Guardar</button>
     </nz-form-control>
   </nz-form-item>
 </form>
