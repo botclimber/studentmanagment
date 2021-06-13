@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_I18N, pt_PT } from 'ng-zorro-antd';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -47,7 +47,7 @@ import {CustomRouteReuseStrategy} from './custom-route-reuse-strategy';
     NgZorroAntdModule,
     ReactiveFormsModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }, { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true },
+  providers: [{ provide: NZ_I18N, useValue: pt_PT }, { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true },
     {
       provide: RouteReuseStrategy,
       useClass: CustomRouteReuseStrategy
