@@ -9,7 +9,7 @@ import {TeacherService} from '../service/teacher.service';
   styleUrls: ['./grade-course.component.css']
 })
 export class GradeCourseComponent implements OnInit {
-  title = 'Informação Geral de Semestre e Turmas';
+  title = 'Notas Alunos';
   gradeCourses = [];
   subjects: any[] = [];
   pageIndex = 0;

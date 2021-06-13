@@ -22,12 +22,21 @@ export class GradeCourseService {
     return this.http.post(`${this.gradeCourseUrl}deleteGradeCourse`, qs.stringify(options), httpOptions);
   }
 
-  editGradeCourse(
+ /* editGradeCourse(
     grade: number,
     subjectIds: any[]
   ): Observable<any> {
     const options = { grade, subjectIds };
     return this.http.post(`${this.gradeCourseUrl}editGradeCourse`, qs.stringify(options, { indices: false }), httpOptions);
+  }*/
+  editGradeCourse(
+	id: string,
+	notas: int[]
+  ): Observable<any> {
+    const params = new HttpParams()
+      .append('id', `${id}`)
+      .append('notas', `${notas}`)
+    return this.http.get(`${this.classUrl}editGradeCourse`, {params});
   }
   constructor(private http: HttpClient) {}
 }

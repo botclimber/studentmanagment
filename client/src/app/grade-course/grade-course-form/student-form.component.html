@@ -1,0 +1,56 @@
+<nz-page-header nzBackIcon [nzTitle]="title">
+  <nz-breadcrumb nz-page-header-breadcrumb [nzAutoGenerate]="true">
+  </nz-breadcrumb>
+</nz-page-header>
+<form nz-form [formGroup]="studentForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" nzRequired nzFor="sno">Número de Estudante</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Por favor, insira o número de identificação do estudante">
+      <input type="text" nz-input formControlName="sno" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" nzRequired nzFor="name">Nome</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Por favor, insira o nome do aluno">
+      <input type="text" nz-input formControlName="name" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" nzRequired nzFor="gender">Gênero</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Por favor, insira um gênero">
+      <nz-radio-group formControlName="gender">
+        <label nz-radio nzValue="1">Masculino</label>
+        <label nz-radio nzValue="0">Feminino</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" nzRequired nzFor="age">Idade</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Por favor, insira uma idade">
+      <nz-input-number formControlName="age" [nzMin]="6" [nzMax]="70" [nzStep]="1"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" nzRequired nzFor="classId">Turma</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Por favor, insira uma turma">
+      <nz-select
+        style="width: 100%"
+        nzPlaceHolder="Por Favor Escolha uma Turma"
+        [nzDropdownStyle]="{height: 50}"
+        (nzScrollToBottom)="loadMore()"
+        formControlName="classId"
+      >
+        <nz-option *ngFor="let class of classes" [nzLabel]="formatClass(class)" [nzValue]="class.id"></nz-option>
+        <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+          <i nz-icon nzType="loading" class="loading-icon"></i> Carregando...
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="8" [nzOffset]="4">
+      <button nz-button nzType="primary">Guardar</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+

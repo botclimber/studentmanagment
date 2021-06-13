@@ -11,8 +11,17 @@ students = [{'id': 1,'sno':1, 'name':'xpto','gender':1,'age':25,'classes':{'grad
 classes = [{'id': 1, 'className': 'turma A', 'grade': 1, 'mainTeacher': {'id': 1, 'name':'bairro 13'}}, {'id': 2, 'className': 'turma B', 'grade': 2, 'mainTeacher': {'id': 1, 'name':'bairro 13'}}]
 courses = [{'id':1, 'grade': 2, 'subjectIds': '1,2','subjectNames':'ISI,ES'}]
 subjects = [{'id': 1, 'name':'ISI'}, {'id': 2, 'name':'ES'}] # id, name
+grades = [{'id': 1, 'grades': [{'course':1, 'grade':15},{'course':2, 'grade':10}]}]
 
-
+def teacherThreat(teacherId):
+    
+    t = None
+    
+    for x in teachers:
+        if x['id'] == int(teacherId):
+            t={'id': x['id'], 'name': x['name']}
+    return t
+    
 def classThreat(classId):
 
 
@@ -73,8 +82,8 @@ def edit_subject():
 def add_subject():
 	data = request.args
 	print(data)
-
-	subjects.append({'id': (subjects[-1]['id'])+1, 'name': data.get('name')})	
+	subjectid=(subjects[-1]['id'])+1 if len(subjects)>0 else 1
+	subjects.append({'id': subjectid, 'name': data.get('name')})	
 
 	return jsonify({}), 200
 
@@ -87,7 +96,8 @@ def delete_subject():
 
 	for x in range(len(subjects)):
 		if subjects[x]['id'] == int(data.get('id')):
-			subjects.pop(x)	
+			subjects.pop(x)
+			break
 
 	return jsonify({}), 200
 # *********************************************
@@ -135,7 +145,7 @@ def edit_teacher():
 		if x['id'] == int(data['id']):
 			x['name'] = data['name']
 			x['age'] = data['age']
-			x['gender'] = data['gender']
+			x['gender'] = int(data['gender'])
 			x['subjectIds'] = data['subjectIds']
 			x['subjectNames'] = ','.join(subThreat(data['subjectIds']))
 				
@@ -151,19 +161,29 @@ def delete_teacher():
 	for x in range(len(teachers)):
 		if teachers[x]['id'] == int(data.get('id')):
 			teachers.pop(x)
-
+			break
 	return jsonify({}), 200	
 # *************** ******** ******************
 
 
-# *************** COURSES ******************
+# *************** COURSES ******************!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 @app.route('/studentmanage/gradeCourse/gradeCourses', methods=['GET'])
 def all_courses():
 
 	return jsonify({'data':{'gradeCourses': courses, 'total': len(courses)}}), 200	
+#sdasdasdasdasdasdasdasdasdasdasdasds
+@app.route('/studentmanage/gradeCourse/editGradeCourse', methods=['GET'])
+def edit_GradeCourse():
+	data = request.form
+	print(data)
+	
+	for x in students:
+		if x['id'] == int(data['id']):
+			break
+				
 
-
+	return jsonify({}), 200	
 # *************** ******** ******************
 
 # TURMAS
@@ -182,23 +202,42 @@ def courset_classes():
 	return jsonify({}), 200	
 
 
-@app.route('/studentmanage/class/addClass', methods=['GET'])
+@app.route('/studentmanage/class/addClass', methods=['POST'])
 def add_classes():
-	data = request.args
+	data = request.form
+	print(data)
+	mainTeacher=teacherThreat(data['mainTeacherId'])	
+	classes.append({'id':(classes[-1]['id'])+1 ,'className': data['className'], 'grade': data['grade'], 'mainTeacher':mainTeacher})
 
 	return jsonify({}), 200	
 
 
 
-@app.route('/studentmanage/class/deleteClass', methods=['GET'])
+@app.route('/studentmanage/class/deleteClass', methods=['POST'])
 def delete_classes():
+	data = request.form
+	print(data)
 
+	for x in range(len(classes)):  
+		if classes[x]['id'] == int(data.get('id')):
+			classes.pop(x)
+			break
 	return jsonify({}), 200	
 
 
 
-@app.route('/studentmanage/class/editClass', methods=['GET'])
+@app.route('/studentmanage/class/editClass', methods=['POST'])
 def edit_classes():
+	data = request.form
+	print(data)
+
+	mainTeacher=teacherThreat(data['mainTeacherId'])
+	
+	for x in range(len(classes)):
+		if classes[x]['id'] == int(data['id']):
+			classes[x]['className'] = data['className']
+			classes[x]['grade'] = data['grade']
+			classes[x]['mainTeacher'] = mainTeacher
 
 	return jsonify({}), 200	
 # *************** ******** ******************
@@ -221,7 +260,7 @@ def add_student():
 	
 	classe, grade = classThreat(data['classId'])
 	
-	students.append({'sno': data['sno'], 'name': data['name'], 'age': data['age'], 'gender': int(data['gender']), 'classes':{'grade': grade, 'className': classe}})
+	students.append({'id':(students[-1]['id'])+1 ,'sno': data['sno'], 'name': data['name'], 'age': data['age'], 'gender': int(data['gender']), 'classes':{'grade': grade, 'className': classe}})
 
 	return jsonify({}), 200	
 
@@ -252,9 +291,10 @@ def delete_student():
 	data = request.args
 	print(data)
 
-	for x in range(len(students)):
+	for x in range(len(students)):  
 		if students[x]['id'] == int(data.get('id')):
 			students.pop(x)
+			break
 
 	return jsonify({}), 200	
 # *************** ******** ******************

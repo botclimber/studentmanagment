@@ -82,8 +82,6 @@
     <td>
       <div class="editable-row-operations">
         <ng-container *ngIf="!editCache[data.id].edit; else saveTpl">
-          <a routerLink="courseTeacher/{{data.id}}/{{data.grade}}">Ver Curso</a>
-          <nz-divider nzType="vertical"></nz-divider>
           <a (click)="startEdit(data.id)">Editar</a>
           <nz-divider nzType="vertical"></nz-divider>
           <a nz-popconfirm nzTitle="Tem certeza que deseja eliminar?" (nzOnConfirm)="delete(data.id)">Eliminar</a>
