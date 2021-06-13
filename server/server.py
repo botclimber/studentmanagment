@@ -1,4 +1,5 @@
 import os
+import json
 from flask import Flask, request, jsonify 
 
 import datetime
@@ -11,7 +12,7 @@ students = [{'id': 1,'sno':1, 'name':'xpto','gender':1,'age':25,'classes':{'grad
 classes = [{'id': 1, 'className': 'turma A', 'grade': 1, 'mainTeacher': {'id': 1, 'name':'bairro 13'}}, {'id': 2, 'className': 'turma B', 'grade': 2, 'mainTeacher': {'id': 1, 'name':'bairro 13'}}]
 courses = [{'id':1, 'grade': 2, 'subjectIds': '1,2','subjectNames':'ISI,ES'}]
 subjects = [{'id': 1, 'name':'ISI'}, {'id': 2, 'name':'ES'}] # id, name
-grades = [{'id': 1, 'grades': [{'course':1, 'grade':15},{'course':2, 'grade':10}]}]
+grades = [{'id': 1, 'name':'xpto', 'className':'Turma A', 'grades': [{'subjectId':1, 'subjectName':'ISI', 'grade':15},{'subjectId':2, 'subjectName':'ES', 'grade':10}]}]
 
 def teacherThreat(teacherId):
     
@@ -171,17 +172,35 @@ def delete_teacher():
 @app.route('/studentmanage/gradeCourse/gradeCourses', methods=['GET'])
 def all_courses():
 
-	return jsonify({'data':{'gradeCourses': courses, 'total': len(courses)}}), 200	
+	return jsonify({'data':{'gradeCourses': grades, 'total': len(grades)}}), 200	
 #sdasdasdasdasdasdasdasdasdasdasdasds
 @app.route('/studentmanage/gradeCourse/editGradeCourse', methods=['GET'])
 def edit_GradeCourse():
-	data = request.form
+	data = request.args
 	print(data)
+	_grades=json.loads(data.get('grades'))
+	print('grades:{}'.format(_grades))
 	
-	for x in students:
-		if x['id'] == int(data['id']):
-			break
+	for x in grades:
+		if x['id'] == int(data.get('id')):
+   
+			for y in _grades:
+				for _x in x['grades']:
+					if int(y['subjectId']) == _x['subjectId']: _x['grade'] = y['grade']
 				
+	print(grades)
+
+	return jsonify({}), 200	
+
+@app.route('/studentmanage/gradeCourse/deleteGradeCourse', methods=['GET'])
+def delete_GradeCourse():
+	data = request.args
+	print(data)
+
+	for x in range(len(grades)):  
+		if grades[x]['id'] == int(data.get('id')):
+			grades.pop(x)
+			break
 
 	return jsonify({}), 200	
 # *************** ******** ******************

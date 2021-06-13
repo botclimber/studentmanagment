@@ -10,6 +10,7 @@
               <li nz-menu-item nzMatchRouter routerLink="gradeCourse">Gestão de Cadeiras por Semestre</li>
               <li nz-menu-item nzMatchRouter routerLink="teacher">Gestão de Professores</li>
               <li nz-menu-item nzMatchRouter routerLink="subject">Gestão de Cadeiras</li>
+			  <input nz-menu-item nzMatchRouter type="file" class="upload" (change)="changeListener($event.target.files)">
             </ul>
           </li>
         </ul>

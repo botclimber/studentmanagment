@@ -3,6 +3,7 @@ import {SubjectService} from '../service/subject.service';
 import {GradeCourseService} from '../service/grade-course.service';
 import {TeacherService} from '../service/teacher.service';
 
+
 @Component({
   selector: 'app-grade-course',
   templateUrl: './grade-course.component.html',
@@ -13,6 +14,7 @@ export class GradeCourseComponent implements OnInit {
   gradeCourses = [];
   subjects: any[] = [];
   pageIndex = 0;
+  _grades= [];
   pageSize = 10;
   loading = true;
   editCache: { [key: string]: any } = {};
@@ -52,10 +54,7 @@ export class GradeCourseComponent implements OnInit {
   }
 
   saveEdit(grade: number): void {
-    const subjectIds = [];
-    let subjectName = '';
-    let subjectId = '';
-    let seperator = ',';
+    /*let seperator = ',';
     for (let i = 0; i < this.editCache[grade].data.subjects.length; i ++) {
       subjectIds[i] = this.editCache[grade].data.subjects[i].id;
       if (i === this.editCache[grade].data.subjects.length - 1) {
@@ -74,31 +73,36 @@ export class GradeCourseComponent implements OnInit {
         subjectNames: subjectName
       };
       this.editCache[grade].data.courses = course;
-    }
-    this.gradeCourseService.editGradeCourse(this.editCache[grade].data.grade, subjectIds).subscribe(result => {
-      const index = this.gradeCourses.findIndex(item => item.grade === grade);
-      Object.assign(this.gradeCourses[index], this.editCache[grade].data);
+    }*/
+	 
+	var data = '[';
+	for(var i = 0; i < this._grades.length; i++){
+  
+  data += '{';
+		data += '"grade": "'+(this._grades[i].grade).toString()+'" , "subjectName": "'+(this._grades[i].subjectName).toString()+'", "subjectId": "'+(this._grades[i].subjectId).toString()+'"}';
+
+	if ((i+1) < this._grades.length) data += ',';
+  }
+
+	data += ']';
+	console.log(data);
+    this.gradeCourseService.editGradeCourse(grade, data).subscribe(result => {
       this.editCache[grade].edit = false;
     });
   }
 
   updateEditCache(): void {
     this.gradeCourses.forEach(item => {
-      this.editCache[item.grade] = {
+      this.editCache[item.id] = {
         edit: false,
         data: { ...item }
       };
-      this.editCache[item.grade].data.subjects = [];
-      if (item.courses != null) {
-        const array = item.courses.subjectIds.split(',');
-        const names = item.courses.subjectNames.split(',');
-        for (let i = 0; i < array.length; i ++) {
-          this.editCache[item.grade].data.subjects[i] = {
-            id: Number(array[i]),
-            name: names[i]
-          };
-        }
-      }
+	  console.log(item.grades.length);
+	  for (var i=0; i<item.grades.length;i++)
+	  {
+		  this._grades[i]=item.grades[i];
+	  }
+	  console.log(this._grades);
     });
   }
 
@@ -118,4 +122,21 @@ export class GradeCourseComponent implements OnInit {
         });
     }
   }
+  
+  public changeListener(files: FileList){
+  console.log(files);
+  if(files && files.length > 0) {
+     let file : File = files.item(0); 
+       console.log(file.name);
+       console.log(file.size);
+       console.log(file.type);
+       let reader: FileReader = new FileReader();
+       reader.readAsText(file);
+       reader.onload = (e) => {
+          let csv: string = reader.result as string;
+          console.log(csv);
+       }
+    }
+}
+
 }

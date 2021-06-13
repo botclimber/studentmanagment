@@ -2,7 +2,6 @@
   <nz-breadcrumb nz-page-header-breadcrumb [nzAutoGenerate]="true">
   </nz-breadcrumb>
 </nz-page-header>
-<button nz-button nzType="primary" class="add-button" routerLink="addNota">Adicionar Notas</button>
 <nz-table #ajaxTable
           nzShowSizeChanger
           [nzFrontPagination]="false"
@@ -17,8 +16,9 @@
   <tr>
     <th nzWidth="5%">#</th>
 	<th nzWidth="20%">Nome Aluno</th>
-    <th nzWidth="20%">Semestre + Turma</th>
-	<th nzWidth="40%">Cadeiras, Notas</th>
+    <th nzWidth="20%">Curso</th>
+	<th nzWidth="40%">Cadeiras - Notas</th>
+	<th nzWidth="20%">Opções</th>
   </tr>
   </thead>
   <tbody>
@@ -28,42 +28,50 @@
       <!--<ng-template #nameInputTpl>
         <input nz-input [(ngModel)]="editCache[data.id].data.name" />
       </ng-template>-->
-	  {{data.countent.name}}
+	  {{data.name}}
     </td>
     <td>
-	{{data.countent.subjectNames}}
-	<!--<ng-container *ngIf="!editCache[data.id].edit; else classSelectTpl">
-        <div [ngSwitch]="data.classes.grade">
-          <div    *ngSwitchCase="1">Primeiro Semestre - {{data.classes.className}}</div>
-          <div    *ngSwitchCase="2">Segundo Semestre - {{data.classes.className}}</div>
-        </div>
-      </ng-container>
-      <ng-template #classSelectTpl>
-        <nz-select
-          style="width: 100%"
-          nzPlaceHolder="Por favor, escolha uma opção"
-          [compareWith]="compareFn"
-          [nzDropdownStyle]="{height: 50}"
-          (nzScrollToBottom)="loadMore()"
-          [(ngModel)]="editCache[data.id].data.classes"
-        >
-          <nz-option [nzLabel]="formatClass(data.classes)"  [nzValue]="data.classes"></nz-option>
-          <nz-option *ngFor="let class of classes" [nzLabel]="formatClass(class)" [nzValue]="class"></nz-option>
-          <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
-            <i nz-icon nzType="loading" class="loading-icon"></i> Carregando...
-          </nz-option>
-        </nz-select>
-      </ng-template>-->
+	{{data.className}}
+	
 	</td>
 	<td>
-	<ng-container *ngIf="!editCache[data.id].edit; else subjectSelectTpl">
-        {{data.countent.cadeiras}}
+		
+	<ng-container *ngIf="!editCache[data.id].edit; else nameInputTpl">
+        <li *ngFor="let data of data.grades; index as i">{{data.subjectName}} - {{data.grade}}</li>
       </ng-container>
-      <<ng-template>
+	<ng-template #nameInputTpl>
+	<li *ngFor="let x of _grades; index as i">
+		{{x.subjectName}} - 
+		<input type="text" nz-input [(ngModel)]="_grades[i].grade" />
+    </li>
+	</ng-template>
+	
+	
+	
+	<!--<ng-container *ngIf="!editCache[data.id].edit; else subjectSelectTpl">-->
+	
+	<!--<ng-container>
+        {{data.cadeiras}}
+      </ng-container>
+      <ng-template>
         <input nz-input [(ngModel)]="editCache[data.id].data.notas" />
       </ng-template>
-	  {{data.counted.notas}}
+	  {{data.notas}}-->
 	</td>
+	<td>
+	<div class="editable-row-operations">
+        <ng-container *ngIf="!editCache[data.id].edit; else saveTpl">
+          <a (click)="startEdit(data.id)">Editar</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a nz-popconfirm nzTitle="Tem certeza que deseja eliminar?" (nzOnConfirm)="delete(data.id)">Eliminar</a>
+        </ng-container>
+        <ng-template #saveTpl>
+          <a nz-popconfirm nzTitle="Tem certeza que deseja guardar?" (nzOnConfirm)="saveEdit(data.id)">Guardar</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="cancelEdit(data.id)">Cancelar</a>
+        </ng-template>
+      </div>
+	 </td>
   </tr>
   </tbody>
 </nz-table>

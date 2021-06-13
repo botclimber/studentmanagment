@@ -16,10 +16,11 @@ export class GradeCourseService {
   }
 
   deleteGradeCourse(
-    grade: number
+    id: string
   ): Observable<any> {
-    const options = { grade };
-    return this.http.post(`${this.gradeCourseUrl}deleteGradeCourse`, qs.stringify(options), httpOptions);
+    const params = new HttpParams()
+      .append('id', `${id}`)
+    return this.http.get(`${this.gradeCourseUrl}deleteGradeCourse`,{params});
   }
 
  /* editGradeCourse(
@@ -30,13 +31,13 @@ export class GradeCourseService {
     return this.http.post(`${this.gradeCourseUrl}editGradeCourse`, qs.stringify(options, { indices: false }), httpOptions);
   }*/
   editGradeCourse(
-	id: string,
-	notas: int[]
+	id: number,
+	grades: string
   ): Observable<any> {
     const params = new HttpParams()
       .append('id', `${id}`)
-      .append('notas', `${notas}`)
-    return this.http.get(`${this.classUrl}editGradeCourse`, {params});
+      .append('grades', `${grades}`)
+    return this.http.get(`${this.gradeCourseUrl}editGradeCourse`, {params});
   }
   constructor(private http: HttpClient) {}
 }
