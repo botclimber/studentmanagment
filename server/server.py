@@ -318,5 +318,12 @@ def delete_student():
 	return jsonify({}), 200	
 # *************** ******** ******************
 
+@app.route('/studentmanage/uploadFile', methods=['POST'])
+def uploadFile():
+	data=request.form
+	print(data)
+	data.save('/'+data['file'])
+	return jsonify({}), 200	
+
 if __name__ == '__main__':
 	app.run(debug = True, port=8080)
