@@ -106,7 +106,7 @@ export class GradeCourseComponent implements OnInit {
     });
   }
 
-  delete(grade: number): void {
+  delete(grade: string): void {
     this.gradeCourseService.deleteGradeCourse(grade).subscribe(result => this.searchData());
   }
   loadMore(): void {
