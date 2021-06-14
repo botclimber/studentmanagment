@@ -7,12 +7,12 @@ import datetime
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '21savage'
 
-teachers = [{'id':1, 'subjectIds':'1,2', 'subjectNames': 'ISI, ES','name':'bairro 13', 'age':'19', 'gender': 1,'file':''}] # id, name, age, genre, subjectIds, subjectNames (server arrangment), img
-students = [{'id': 1,'sno':1, 'name':'xpto','gender':1,'age':25,'classes':{'grade':1, 'className':'turma A'}}]
-classes = [{'id': 1, 'className': 'turma A', 'grade': 1, 'mainTeacher': {'id': 1, 'name':'bairro 13'}}, {'id': 2, 'className': 'turma B', 'grade': 2, 'mainTeacher': {'id': 1, 'name':'bairro 13'}}]
+teachers = [{'id':1, 'subjectIds':'1,2', 'subjectNames': 'ISI, ES','name':'Maria Barbosa', 'age':'35', 'gender': 1,'file':''}] # id, name, age, genre, subjectIds, subjectNames (server arrangment), img
+students = [{'id': 1,'sno':1, 'name':'Manuel Castro','gender':1,'age':25,'classes':{'grade':1, 'className':'turma A'}}]
+classes = [{'id': 1, 'className': 'turma A', 'grade': 1, 'mainTeacher': {'id': 1, 'name':'Maria Barbosa'}}, {'id': 2, 'className': 'turma B', 'grade': 2, 'mainTeacher': {'id': 1, 'name':'Maria Barbosa'}}]
 courses = [{'id':1, 'grade': 2, 'subjectIds': '1,2','subjectNames':'ISI,ES'}]
 subjects = [{'id': 1, 'name':'ISI'}, {'id': 2, 'name':'ES'}] # id, name
-grades = [{'id': 1, 'name':'xpto', 'className':'Turma A', 'grades': [{'subjectId':1, 'subjectName':'ISI', 'grade':15},{'subjectId':2, 'subjectName':'ES', 'grade':10}]}]
+grades = [{'id': 1, 'name':'Manuel Castro', 'className':'Turma A', 'grades': [{'subjectId':1, 'subjectName':'ISI', 'grade':15},{'subjectId':2, 'subjectName':'ES', 'grade':10}]}]
 
 def teacherThreat(teacherId):
     

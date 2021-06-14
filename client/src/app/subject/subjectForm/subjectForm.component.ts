@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
   templateUrl: './subjectForm.component.html'
 })
 export class SubjectFormComponent implements OnInit {
-  title = 'Adicionar Nova Cadeira';
+  title = 'Adicionar Nova Unidade Curricular';
   subjectForm: FormGroup;
 
   submitForm(): void {

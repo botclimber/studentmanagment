@@ -10,7 +10,7 @@ import {TeacherService} from '../service/teacher.service';
   styleUrls: ['./grade-course.component.css']
 })
 export class GradeCourseComponent implements OnInit {
-  title = 'Notas Alunos';
+  title = 'Notas Estudantes';
   gradeCourses = [];
   subjects: any[] = [];
   pageIndex = 0;

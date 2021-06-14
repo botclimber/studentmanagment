@@ -7,7 +7,7 @@ import {SubjectService} from '../service/subject.service';
   styleUrls: ['./subject.component.css']
 })
 export class SubjectComponent implements OnInit {
-  title = 'Cadeiras';
+  title = 'Unidades Curriculares';
   subjects = [];
   pageIndex = 1;
   pageSize = 5;
